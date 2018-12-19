@@ -1,0 +1,53 @@
+
+Compiling ONL source code:
+-------------------------
+
+1. Copy the ONL source code.
+
+2. switch to root user
+   $ sudo su
+   $ cd OpenNetworkLinux
+
+3. Create the onlbuilder environment by running following command
+   $ docker/tools/onlbuilder -8
+
+4. source the envirnoment configuration
+   $ source setup.env
+
+5. execute make file
+   $ make amd64
+
+6. ONL package will be generated in this path
+   $ cd OpenNetworkLinux/RELEASE/jessie/amd64
+   $ ls -ltr
+     -rw-r--r-- 1 root root        85 Nov 22 12:27 ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64.swi.md5sum
+     -rw-r--r-- 1 root root 529193744 Nov 22 12:27 ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64.swi
+     -rwxr-xr-x 1 root root 552643041 Nov 22 12:28 ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64_INSTALLED_INSTALLER
+     -rw-r--r-- 1 root root        33 Nov 22 12:28 ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64_INSTALLED_INSTALLER.md5sum
+     -rw-r--r-- 1 root root        33 Nov 22 12:30 ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64_SWI_INSTALLER.md5sum
+     -rwxr-xr-x 1 root root 552643035 Nov 22 12:30 ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64_SWI_INSTALLER
+
+   "ONL-2.0.0_ONL-OS_2018-11-22.0509-97e0a5b_AMD64_INSTALLED_INSTALLER" is the final ONL package.
+
+
+Executing the script:
+---------------------
+
+1. Copy the install_onl.sh and <ONL_*_INSTALLED_INSTALLER> package to one of the
+   the server which should be accessible to OLT through 'ma1' interface of the OLT
+   for the first time. means for the 'Fresh ONL installation'.
+
+2. Now install_onl.sh and <ONL_*_INSTALLED_INSTALLER> files are at OLT. trigger the
+   following command to install ONL for the first time.
+
+   $ sh install_onl.sh <ONL_*_INSTALLED_INSTALLER>
+
+3. In case of upgrade copy install_onl.sh and <ONL_*_INSTALLED_INSTALLER> files to
+   the server from which vlan interfaces from the OLT should be reachable.
+
+4. Download install_onl.sh and <ONL_*_INSTALLED_INSTALLER> files to OLT and run the
+   same above command to upgrade the ONL.
+
+  $ sh install_onl.sh <ONL_*_INSTALLED_INSTALLER>
+
+  This will upgrade the ONL from Active to Standby.
